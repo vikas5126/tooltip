@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+// import './App.css';
+import { useState } from "react";
+import styles from "./App.module.css"
+import Form from "./component/Form";
+import Hover from "./component/Hover";
 function App() {
+  const [selected, setSelected] = useState("Top");
+  const [isHover, setIsHover] = useState(false);
+
+   const handleMouseEnter = () => {
+      setIsHover(true);
+   };
+   const handleMouseLeave = () => {
+      setIsHover(false);
+   };
+
+  function updateValue (value) {
+    setSelected(value);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.App}>
+      <Form update={updateValue} value={selected}/>
+      <Hover value={selected} hover={isHover} enter={handleMouseEnter} leave={handleMouseLeave}/>
     </div>
   );
 }
